@@ -6,6 +6,7 @@ from scipy.io import loadmat, savemat
 import shutil
 import random 
 
+#assumes that mat files are generated first from process_database_liver.py 
 def pngs_from_mat(mat_file_path, liver_seg_path, outpath, numpatients = 25):
     # generate train, test, validation pngs from .mat files
     # mat_file_path: the path that contains each patients .mat files 
