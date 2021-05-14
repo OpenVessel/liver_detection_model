@@ -1,4 +1,4 @@
-##
+####
 
 
 
@@ -7,8 +7,9 @@
 #Nathan Reilly 
 #Gregory Glatzer 
 
-#5/14/2021 
+#5/14/2021 formatting and citation work
 #Leslie Wubbel 
+
 ###
 
 import os
@@ -19,6 +20,7 @@ import scipy.io
 from PIL import Image
 import time 
 start = time.time()
+
 # path constants
 niftis_path = 'E:\Datasets\LiTS_liver_lesion\LITS17'
 root_process_database = '../../output_folder/'
@@ -26,8 +28,6 @@ root_process_database = '../../output_folder/'
 ## WINDOWS STRINGS
 # niftis_path = r'E:\Datasets\LiTS_liver_lesion\LITS17'
 # root_process_database = r'D:\L_pipe\liver_open\liverseg-2017-nipsws\output_folder'
-
-
 ## Folders to be created
 folder_volumes = os.path.join(root_process_database, 'images_volumes/')
 folder_seg_liver = os.path.join(root_process_database, 'liver_seg/')
