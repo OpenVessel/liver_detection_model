@@ -106,7 +106,7 @@ def slice_classification(train_imgs_path, test_imgs_path, val_imgs_path, save_mo
     
 
 
-def call_model(test_option = False):
+def train_model(test_option = False):
     ## calls other functions in this script to be called into other scripts 
     train_imgs_path = r"C:\Users\12673\Desktop\Projects\OpenVessel\liverseg-2017-nipsws\LiTS_database\images_volumes\LiverPNGsfrommatlabseperated\Train"
     val_imgs_path = r"C:\Users\12673\Desktop\Projects\OpenVessel\liverseg-2017-nipsws\LiTS_database\images_volumes\LiverPNGsfrommatlabseperated\Validation"
