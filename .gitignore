@@ -1,3 +1,7 @@
 
 __pycache__/slice_classification_v1.cpython-37.pyc
 __pycache__/class_calls.cpython-37.pyc
+*.mat
+data_output/images_volumes/10/186.mat
+*.mat
+*.png
