@@ -9,7 +9,7 @@ class Config:
 
     def __init__(self):
         self.__database_root = 'LiTS_database'
-        
+        self.train = True
         #self.__database_root = 'predict_database'
 
         self.root_folder = os.path.dirname(os.path.realpath(__file__))
@@ -26,6 +26,18 @@ class Config:
         self.phase = 'train' ## train or test
 
 
+        root_path = os.getcwd()  #'D:\\L_pipe\\Liver_detection Model\\liver_detection_model\
+        
+        self.outpath =  root_path + "\data_output\liver_detection_train" ## output file 
+        self.nifti_path = root_path + "\liver_detection_model\LiTS_dataset" ### relative to script
+        
+        self.root_process_database = root_path + "liver_detection_model\data_output"
+
+        ## images_volume liver_Seg
+        self.mat_file_path =  root_path +  "\data_output\images_volumes"
+        self.liver_seg_path =  root_path +  "\data_output\liver_seg"
+        self.output_model = root_path + "\data_output\model_output" 
+        
         self.labels = True
         self.fine_tune = 0
 

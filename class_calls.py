@@ -1,10 +1,10 @@
 import time 
 import math
-import slice_classification_v1
 import tensorflow as tf
+import slice_classification_v1 as sc
 
-class liver_detection:
-    def __init_(self, config):
+class LiverDetection:
+    def __init__(self, config):
         self.config = config
         ## additional parameters
 
@@ -44,13 +44,19 @@ class liver_detection:
         return wrapper
 
         
-    def test(self, testing_volume):
+    def test(self, config, outpath):
 
         #classifier = tf.keras.models.load_model('classificationModel')
+        if config.train == False:
+            sc.train_model(outpath)
+
         pass
 
-    def train(self, testing_volume, validation_volume):
-        classifier = tf.keras.models.load_model('classificationModel')
+    def train(self, config,  outpath):
+        if config.train == True:
+            sc.train_model(outpath)
         
         return
 ### call the model and any preprocess steps 
+    def __repr__(self):
+        return 
