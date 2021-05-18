@@ -26,6 +26,7 @@ def test(test_imgs_path):
     # https://machinelearningspace.com/yolov3-tensorflow-2-part-4/
 
     #load trained model
+    #make this path relative/ from config file
     model = tf.keras.models.load_model(r'C:\Users\12673\Desktop\Projects\OpenVessel\liverseg-2017-nipsws\LiTS_database\images_volumes\Liver PNGs from matlab seperated\ClassificationModel')
     class_names = {'Liver': 0, 'Non-Liver': 1}
     for i in os.listdir(test_imgs_path):
@@ -108,6 +109,8 @@ def slice_classification(train_imgs_path, test_imgs_path, val_imgs_path, save_mo
 
 def train_model(test_option = False):
     ## calls other functions in this script to be called into other scripts 
+
+    # make relative paths
     train_imgs_path = r"C:\Users\12673\Desktop\Projects\OpenVessel\liverseg-2017-nipsws\LiTS_database\images_volumes\LiverPNGsfrommatlabseperated\Train"
     val_imgs_path = r"C:\Users\12673\Desktop\Projects\OpenVessel\liverseg-2017-nipsws\LiTS_database\images_volumes\LiverPNGsfrommatlabseperated\Validation"
     test_imgs_path = r"C:\Users\12673\Desktop\Projects\OpenVessel\liverseg-2017-nipsws\LiTS_database\images_volumes\LiverPNGsfrommatlabseperated\Test\Liver"
