@@ -22,9 +22,12 @@ import time
 start = time.time()
 
 # path constants
-niftis_path = 'E:\Datasets\LiTS_liver_lesion\LITS17'
-root_process_database = '../../output_folder/'
+current_directory = os.getcwd()
+print(current_directory)
+niftis_path = 'E:\Datasets\LiTS_liver_lesion\LITS17' ## Change this line to where LITS17 dataset is solved 
+root_process_database = current_directory + '\liver_detection_model\data_output'   ## output path goes here
 
+print(root_process_database)
 ## WINDOWS STRINGS
 # niftis_path = r'E:\Datasets\LiTS_liver_lesion\LITS17'
 # root_process_database = r'D:\L_pipe\liver_open\liverseg-2017-nipsws\output_folder'

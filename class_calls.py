@@ -1,11 +1,14 @@
-
+import time 
+import math
+import slice_classification_v1
+import tensorflow as tf
 
 class liver_detection:
     def __init_(self, config):
-
+        self.config = config
         ## additional parameters
 
-        def logSummary(self, phase, time_list):
+    def logSummary(self, phase, time_list):
         print("--- SUMMARY ({0}) ---".format(phase))
         for step in time_list:
             print("Step: ", step['name'])
@@ -40,4 +43,14 @@ class liver_detection:
             return step_output
         return wrapper
 
+        
+    def test(self, testing_volume):
+
+        #classifier = tf.keras.models.load_model('classificationModel')
+        pass
+
+    def train(self, testing_volume, validation_volume):
+        classifier = tf.keras.models.load_model('classificationModel')
+        
+        return
 ### call the model and any preprocess steps 

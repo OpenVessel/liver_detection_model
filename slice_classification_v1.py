@@ -25,7 +25,12 @@ import pandas as pd
 import datetime
 
 def slice_classification(train_imgs_path, test_imgs_path, val_imgs_path, save_model_path):
-    
+    """ 
+    train_imags_path 
+    test_imgs_path 
+    val_imgs_path  
+    save_model_path
+    """ 
     #images are extracted from the path or folder
     train = ImageDataGenerator( rescale = 1./255 ) 
     #print(type(train))                                     #HERE IS WHERE THE ISSUE MAY BE???
@@ -38,7 +43,7 @@ def slice_classification(train_imgs_path, test_imgs_path, val_imgs_path, save_mo
                                             class_mode = 'binary',
                                             seed = 44)
     class_names = train_dataset.class_indices
-    print(class_names)
+    
     validation_dataset = train.flow_from_directory(val_imgs_path,
                                             shuffle = True,      
                                             target_size = (512, 512), #input shape here
@@ -68,6 +73,7 @@ def slice_classification(train_imgs_path, test_imgs_path, val_imgs_path, save_mo
                 optimizer = RMSprop(lr = 1e-4),
                 metrics = ['accuracy'])
     start = datetime.datetime.now()
+
     fitted_model = model.fit(train_dataset,
                         steps_per_epoch = 2,
                         epochs = 30,
@@ -75,6 +81,7 @@ def slice_classification(train_imgs_path, test_imgs_path, val_imgs_path, save_mo
                         validation_freq = 1,
                         #callbacks = [tensorboard, early_stopping]
                             )
+    
     end = datetime.datetime.now()
     elapsed = end - start
     print('\n ---------Elapsed Time-----------')
@@ -105,6 +112,8 @@ def slice_classification(train_imgs_path, test_imgs_path, val_imgs_path, save_mo
     #         .format(class_names[np.argmax(val)], 100 * np.max(val))
     #     )
 
+    ## Missing way to save weights into tensorboard
+
 
 
 def model_call_function():
@@ -114,6 +123,7 @@ def model_call_function():
     test_imgs_path = r"C:\Users\12673\Desktop\Projects\OpenVessel\liverseg-2017-nipsws\LiTS_database\images_volumes\LiverPNGsfrommatlabseperated\Test\Liver"
     save_model_path = r"C:\Users\12673\Desktop\Projects\OpenVessel\liverseg-2017-nipsws\LiTS_database\images_volumes\LiverPNGsfrommatlabseperated\ClassificationModel"
     slice_classification(train_imgs_path, test_imgs_path, val_imgs_path, save_model_path)
+
 model_call_function()
 # path = r"C:\Users\12673\Desktop\Projects\OpenVessel\liverseg-2017-nipsws\LiTS_database\images_volumes\Liver PNGs from matlab seperated\Train\Liver\704127.png"
 # x = np.asarray(Image.open(path))
