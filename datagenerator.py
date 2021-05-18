@@ -13,8 +13,9 @@ def pngs_from_mat(mat_file_path, liver_seg_path, outpath, numpatients = 25):
     # outpath: root path to save the generated pngs
     # numpatients: the number of patients used to train the detection model (from 1 - 131)
     # end result --> saves pngs to train, test, validation pathing separated by liver and non-liver
-
+    numpatients = int(numpatients)
     assert(numpatients <= 131)
+
 
     train = os.path.join(outpath, "Train")
     validation = os.path.join(outpath, "Validation")
