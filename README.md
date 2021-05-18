@@ -10,10 +10,10 @@ The script slice_classification.py is used to generate and test the Liver Slice 
 The model is implemented in the file file_sorter.py, which is used to generate a sub dataset of the LiTs database that attempts to remove PNGs that are not liver containing.
 
 
-## LiTS dataset - you will need to make account and download from their google drive
+### LiTS dataset - you will need to make account and download from their google drive
 LiTS dataset --> https://competitions.codalab.org/competitions/17094#learn_the_details
 
-## Step 2 you will need to convert the LiTS dataset to matlab files PNGs using the script below or download the preprocessed dataset  --> here 
+### You will need to convert the LiTS dataset to matlab files PNGs using the script below or download the preprocessed dataset  --> here 
 
 
 
