@@ -22,7 +22,6 @@ class Config:
         self.images_volumes = 'images_volumes'
         self.item_seg = 'item_seg'
         self.liver_seg = 'liver_seg'
-        
         self.debug = 0 # 0 for false, 1 for true
         self.phase = 'train' ## train or test
 
