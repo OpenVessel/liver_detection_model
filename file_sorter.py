@@ -4,7 +4,6 @@ import os
 import tensorflow as tf
 from scipy.io import loadmat, savemat
 import shutil
-<<<<<<< HEAD
 import random 
 
 def pngs_from_mat(mat_file_path, liver_seg_path, outpath, numpatients = 25):
@@ -111,127 +110,6 @@ def new_data_with_liver_detection_model(mat_file_path, classifier_path, new_data
         print("Patient: ", patient)
         mat_path = os.path.join(mat_file_path, patient)
     
-=======
-
-
-# # #generate pngs from matlab
-# # for patient in os.listdir(mat_file_path):
-# #     if patient == "2":
-# #         keep_list = []
-# #         mat_file_patientpath = os.path.join(mat_file_path, patient)
-# #         for file in os.listdir(mat_file_patientpath):
-# #             file_num = file[:-4]
-# #             mat_file = os.path.join(mat_file_patientpath, file)
-# #             mat_array = np.array(loadmat(mat_file)['section'])
-# #             mat_png = Image.fromarray(mat_array).convert('RGB')
-# #             arr = np.asarray(mat_png)
-# #             X = np.expand_dims(arr, axis = 0)
-# #             images = np.vstack([X])
-# #             val = classifier.predict(images)
-# #             if val == 1:
-# #                 continue 
-# #             else:
-#                 # print(patient, file, val)
-
-# liver_seg_path = r"C:\Users\12673\Desktop\Projects\OpenVessel\liverseg-2017-nipsws\LiTS_database\images_volumes\liver_seg"
-# outpath = r"C:\Users\12673\Desktop\Projects\OpenVessel\liverseg-2017-nipsws\LiTS_database\images_volumes\Liver PNGs from matlab seperated"
-# train_outpath = os.path.join(outpath, "Train")
-# test_outpath = os.path.join(outpath, "Test")
-# validation_outpath = os.path.join(outpath, "Validation")
-# if not os.path.exists(train_outpath):
-#     os.mkdir(train_outpath)
-# if not os.path.exists(test_outpath):
-#     os.mkdir(test_outpath)
-# if not os.path.exists(validation_outpath):
-#     os.mkdir(validation_outpath)
-
-# liver_train = os.path.join(train_outpath, "Liver")
-# nl_train = os.path.join(train_outpath, "Non-Liver")
-# liver_test = os.path.join(test_outpath, "Liver")
-# nl_test = os.path.join(test_outpath, "Non-Liver")
-# liver_validation = os.path.join(validation_outpath, "Liver")
-# nl_validation = os.path.join(validation_outpath, "Non-Liver")
-# paths = [liver_train, nl_train, liver_test, nl_test, liver_validation, nl_validation]
-# for path_ in paths:
-#     if not os.path.exists(path_):
-#         os.mkdir(path_)
-
-
-# # generate train, test, validation pngs from .mat files
-# for patient in os.listdir(mat_file_path):
-#     if patient in ["62","7","72","30","127","128","1","37","21",
-#                    "16","39","80","87","19","102","10","9","39",
-#                    "6","8","11","73"]:
-
-
-#         patient_liver_segpath = os.path.join(liver_seg_path, patient)
-#         mat_file_patientpath = os.path.join(mat_file_path, patient)
-#         for file in os.listdir(mat_file_patientpath):
-
-#             number = file[:-4]
-#             #convert matlab to pngs in a different folder
-#             mat_file = os.path.join(mat_file_patientpath, file) #the individual files
-#             #to pngs
-#             mat_array = np.array(loadmat(mat_file)['section'])
-#             mat_png = Image.fromarray(mat_array).convert('RGB')
-
-#             png_outpath = os.path.join(outpath)
-#             if not os.path.exists(png_outpath):
-#                 os.mkdir(png_outpath)
-            
-#             image = Image.open(os.path.join(liver_seg_path, patient, str(number + ".png")))
-#             image = np.array(image)
-            
-#             # curr = os.path.join(png_outpath, str(number + ".png"))
-#             if np.count_nonzero(image) != 0: 
-#                 print(patient, number)
-#                 if patient in ["62","7","72","30","127","128","1","37","21",
-#                    "16","39","80","87"]:
-#                     x = os.path.join(liver_train, str(number + "_" + patient + ".png"))
-#                     mat_png.save(x)
-#                 if patient in ["19","102","10","9","6"]:
-#                     y = os.path.join(liver_validation, str(number + "_" + patient + ".png"))
-#                     mat_png.save(y)
-#                 if patient in ["8","11","73"]:
-#                     z = os.path.join(liver_test, str(number + "_" + patient + ".png"))
-#                     mat_png.save(z)
-#             else:
-#                 if patient in ["62","72","30","127","128","1","37","21",
-#                    "7","16","39","80","87"]:
-#                         X = os.path.join(nl_train, str(number +  "_" +patient + ".png"))
-#                         mat_png.save(X)
-
-#                 if patient in ["19","102","10","9","6"]:
-#                     Y = os.path.join(nl_validation, str(number +  "_" +patient + ".png"))
-#                     mat_png.save(Y)
-#                 if patient in ["8","11","73"]:
-#                     Z = os.path.join(nl_test, str(number +  "_" +patient + ".png"))
-#                     mat_png.save(Z)
-            
-
-# sorting the files (once the models done training)
-
-# LOAD MODEL HERE 
-mat_file_path = r"C:\Users\12673\Desktop\Projects\OpenVessel\liverseg-2017-nipsws\LiTS_database\images_volumes"
-classifier = tf.keras.models.load_model(r"C:\Users\12673\Desktop\Projects\OpenVessel\liverseg-2017-nipsws\LiTS_database\images_volumes\Liver PNGs from matlab seperated\ClassificationModel")
-new_dataset_outpath = r"C:\Users\12673\Desktop\Projects\OpenVessel\liverseg-2017-nipsws\refined LiTs database"
-liver_seg_path = r"C:\Users\12673\Desktop\Projects\OpenVessel\liverseg-2017-nipsws\LiTS_database\images_volumes\liver_seg"
-item_seg_path = r"C:\Users\12673\Desktop\Projects\OpenVessel\liverseg-2017-nipsws\LiTS_database\images_volumes\item_seg"
-
-# create patient paths in new folder 
-path_list = [os.path.join(new_dataset_outpath, "image_volumes"), os.path.join(new_dataset_outpath, "item_seg"), os.path.join(new_dataset_outpath, "liver_seg")]
-for i in range(0,131):
-    for path in path_list:
-        new_path = os.path.join(path, str(i))
-        if not os.path.exists(new_path):
-            os.mkdir(new_path)
-
-for patient in os.listdir(mat_file_path):
-    if patient in ["9","86","87","88","89","90","91","92","93","94","97","95","96","98","99"]:
-        print("Patient: ", patient)
-        mat_path = os.path.join(mat_file_path, patient)
-       
->>>>>>> c1d4c8eb56f4edd8851e3a4f7d4c8fd25e3f6716
         keep_list = []
         num_files = len(os.listdir(mat_path)) + 1
 
@@ -245,25 +123,12 @@ for patient in os.listdir(mat_file_path):
             
             mat_array = np.array(loadmat(mat_file)['section']) #['section'] what does this do????
             mat_png = Image.fromarray(mat_array).convert('RGB')
-<<<<<<< HEAD
-
-=======
-            # #     COULD TRY TO INPUT AN IMAGE ?? (what exactly does the model do to data being inputted)
->>>>>>> c1d4c8eb56f4edd8851e3a4f7d4c8fd25e3f6716
             back_to_array = np.asarray(mat_png)
             back_to_array = np.expand_dims(back_to_array, axis = 0) #also data type of uint-8 
             
             val = classifier.predict(back_to_array)
-<<<<<<< HEAD
             
             if val[0] < float(.55):
-=======
-            print(val)
-            #print(patient, number, val)
-
-            if val[0] < float(.55): #from .5 
-                #it seems to be classified as liver 
->>>>>>> c1d4c8eb56f4edd8851e3a4f7d4c8fd25e3f6716
                 keep_list.append(int(number))
         
         max_keep = max(keep_list)
@@ -374,18 +239,4 @@ for patient in os.listdir(mat_file_path):
                 print("Saved....\n")
                 print(os.path.join(item_seg_path, patient, str(str(i) + ".png") + "\n"))
                 print(os.path.join(new_dataset_outpath, "image_volumes", patient, str(str(i) + ".mat")) + "\n")
-<<<<<<< HEAD
                 print(os.path.join(new_dataset_outpath, "liver_seg", patient, str(str(i) + ".png")))
-=======
-                print(os.path.join(new_dataset_outpath, "liver_seg", patient, str(str(i) + ".png")))
-
-                    
-
-            
-
-
-
-
-
-
->>>>>>> c1d4c8eb56f4edd8851e3a4f7d4c8fd25e3f6716
