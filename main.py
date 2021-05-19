@@ -45,7 +45,7 @@ if __name__ =='__main__':
 
     if cmdline.mode == "test":
         ##implement class call 
-        liver_det.test( config, output_path_of_model)
+        liver_det.test(config, output_path_of_model)
     elif cmdline.mode == "train":
         liver_det.train(config,  output_path_of_model)
     else:
