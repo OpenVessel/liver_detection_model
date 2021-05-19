@@ -36,6 +36,8 @@ def pngs_from_mat(mat_file_path, liver_seg_path, outpath, numpatients = 25):
     patient_list = random.sample(range(131), numpatients)
     cutoff = int( len(patient_list) *.8 )
 
+    
+
     for patient in os.listdir(mat_file_path):
         if patient in patient_list:
 
