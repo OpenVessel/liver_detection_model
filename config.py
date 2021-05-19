@@ -28,7 +28,7 @@ class Config:
 
         root_path = os.getcwd()  #'D:\\L_pipe\\Liver_detection Model\\liver_detection_model\
         
-        self.outpath =  root_path + "\data_output\liver_detection_train" ## output file 
+        self.outpath =  root_path + "\data_output\liver_detection" ## output file 
         self.nifti_path = root_path + "\liver_detection_model\LiTS_dataset" ### relative to script
         
         self.root_process_database = root_path + "liver_detection_model\data_output"
