@@ -3,6 +3,7 @@ import math
 import tensorflow as tf
 import slice_classification_v1 as sc
 import os 
+
 class LiverDetection:
     def __init__(self, config):
         self.config = config
@@ -19,7 +20,7 @@ class LiverDetection:
         print("\nTotal time taken: {} seconds or {} minutes {}s to run\n".format(total_time, math.floor(total_time/60), total_time % 60))
 
     
-    def with_time(step):
+    def with_time(self, step):
         def wrapper(self, *args, **kwargs):
             # run step
             print('Running step: ' + step.__name__ + "\n")
@@ -69,6 +70,7 @@ class LiverDetection:
         sc.train_model(path_list)
         
         return
-### call the model and any preprocess steps 
+    
+    ### call the model and any preprocess steps 
     def __repr__(self):
         return 
