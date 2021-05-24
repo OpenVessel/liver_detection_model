@@ -22,25 +22,32 @@ import os
 import pandas as pd
 import datetime
 
-def test(test_imgs_path):
+def test(path_list):
     # https://machinelearningspace.com/yolov3-tensorflow-2-part-4/
-
-    #load trained model
-    #make this path relative/ from config file
-    model = tf.keras.models.load_model(r'C:\Users\12673\Desktop\Projects\OpenVessel\liverseg-2017-nipsws\LiTS_database\images_volumes\Liver PNGs from matlab seperated\ClassificationModel')
+    #path_list[0] = train_img_path
+    #path_list[1] = val_img_path
+    #path_list[2] = test_img_path
+    #path_list[3] = saved_model_path
+    #save_model path goes in here, look to see if the path exists first before trying to test
+    try:
+        model = tf.keras.models.load_model(path_list[3])
+    except: #not sure if you need to specify the error type for this to work
+        print('No saved model. Beginning training...')
+        train_model(path_list)
     class_names = {'Liver': 0, 'Non-Liver': 1}
-    for i in os.listdir(test_imgs_path):
+    for i in os.listdir(path_list[2]):
         
-        img = image.load_img(test_imgs_path + '\\' + i, target_size = (512,512))
+        img = image.load_img(path_list[2] + '\\' + i, target_size = (512,512))
         plt.imshow(img)
         plt.show()
         X = image.img_to_array(img)
         X = np.expand_dims(X, axis = 0)
         images = np.vstack([X])
         val = model.predict(images)
-        print(
-            "This image most likely belongs to {} with a {:.2f} percent confidence."
-            .format(class_names[np.argmax(val)], 100 * np.max(val)))
+        if val == 0:
+            print('This is a liver slice')
+        else:
+            print('This is a non-liver slice')
 
 def slice_classification(train_imgs_path, test_imgs_path, val_imgs_path, save_model_path):
     """ 
@@ -53,7 +60,7 @@ def slice_classification(train_imgs_path, test_imgs_path, val_imgs_path, save_mo
 
 
     train = ImageDataGenerator( rescale = 1./255 ) 
-    #print(type(train))                                     #HERE IS WHERE THE ISSUE MAY BE???
+    
     validation = ImageDataGenerator( rescale = 1./255 )
 
 
@@ -89,6 +96,8 @@ def slice_classification(train_imgs_path, test_imgs_path, val_imgs_path, save_mo
         tf.keras.layers.Dense(512, activation = 'relu'),
         tf.keras.layers.Dense(1, activation = 'sigmoid')
     ])
+    if not os.path.exists(save_model_path):
+        os.mkdir(save_model_path)
     model.save(save_model_path)
     ### record model BCE loss
     ## metric accuracy 
@@ -114,18 +123,13 @@ def slice_classification(train_imgs_path, test_imgs_path, val_imgs_path, save_mo
     
 
 
-def train_model(test_option = False):
+def train_model(path_list, train_option = True):
     ## calls other functions in this script to be called into other scripts 
-
-    # make relative paths
-    train_imgs_path = r"C:\Users\12673\Desktop\Projects\OpenVessel\liverseg-2017-nipsws\LiTS_database\images_volumes\LiverPNGsfrommatlabseperated\Train"
-    val_imgs_path = r"C:\Users\12673\Desktop\Projects\OpenVessel\liverseg-2017-nipsws\LiTS_database\images_volumes\LiverPNGsfrommatlabseperated\Validation"
-    test_imgs_path = r"C:\Users\12673\Desktop\Projects\OpenVessel\liverseg-2017-nipsws\LiTS_database\images_volumes\LiverPNGsfrommatlabseperated\Test\Liver"
-    save_model_path = r"C:\Users\12673\Desktop\Projects\OpenVessel\liverseg-2017-nipsws\LiTS_database\images_volumes\LiverPNGsfrommatlabseperated\ClassificationModel"
+    train_imgs_path = path_list[0]
+    val_imgs_path = path_list[1]
+    test_imgs_path = path_list[2]
+    save_model_path = path_list[3]
     slice_classification(train_imgs_path, test_imgs_path, val_imgs_path, save_model_path)
-    if test_option == True:
-        test(test_imgs_path)
-
 
 
 
