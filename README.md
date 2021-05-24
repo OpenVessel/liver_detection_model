@@ -1,4 +1,4 @@
-# liver_detection_model
+# Liver Detection Model
 Liver Detection Model is preprocessing method for sorting images in CT scan between liver and non-liver
 
 
