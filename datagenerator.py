@@ -35,7 +35,8 @@ def pngs_from_mat(mat_file_path, liver_seg_path, outpath, numpatients = 25):
 
     #generates a list of randomly generated numbers (patients in range 0,130) 
     #to be used for the train, validation data for detection model
-    patient_list = random.sample(range(131), numpatients)
+    patient_list = random.sample(range(131), numpatients) 
+    patient_list = map(str, patient_list)
     print(patient_list)
     cutoff = int( len(patient_list) *.8 )
 
@@ -43,7 +44,7 @@ def pngs_from_mat(mat_file_path, liver_seg_path, outpath, numpatients = 25):
 
     for patient in os.listdir(mat_file_path): #0-131
         
-        if int(patient) in patient_list:
+        if patient in patient_list:
 
             patient_liver_segpath = os.path.join(liver_seg_path, patient)
             mat_file_patientpath = os.path.join(mat_file_path, patient)
@@ -65,6 +66,7 @@ def pngs_from_mat(mat_file_path, liver_seg_path, outpath, numpatients = 25):
                         print("l t: ",liver_train)
                         x = os.path.join(liver_train, str(number + "_" + patient + ".png"))
                         mat_png.save(x)
+                        print("saved")
                     else:
                         print("l v:",liver_validation)
                         y = os.path.join(liver_validation, str(number + "_" + patient + ".png")) 
