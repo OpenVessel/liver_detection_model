@@ -36,8 +36,7 @@ def pngs_from_mat(mat_file_path, liver_seg_path, outpath, numpatients = 25):
     #generates a list of randomly generated numbers (patients in range 0,130) 
     #to be used for the train, validation data for detection model
     patient_list = random.sample(range(131), numpatients) 
-    patient_list = map(str, patient_list)
-    print(patient_list)
+    patient_list = [str(x) for x in patient_list]
     cutoff = int( len(patient_list) *.8 )
 
     
