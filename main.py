@@ -3,12 +3,12 @@ import tensorflow as tf
 import time
 import math
 
-import datagenerator as dg 
+from datagenerator import pngs_from_mat
 import preprocess_database_liver as pdl
 from class_calls import LiverDetection
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
-mat_file_path = r"C:\Users\12673\Desktop\Projects\OpenVessel\liverseg-2017-nipsws\LiTS_database\images_volumes"
+
 
 # Global vars and driver
 if __name__ =='__main__':
@@ -21,11 +21,6 @@ if __name__ =='__main__':
     
     config = Config()
     config.labels = True # Change to false if we don't have labels
-
-    ##class_calls here ## calls the model the model is either set to training or testing
-    liver_det = LiverDetection(config)
-    
-    #generate train files 
     num_patients = input("How many files (1-131) are being used in the train dataset?")
     nifti_bool = input("LiTs database in nifti format still (y/n)?") 
 
@@ -39,9 +34,17 @@ if __name__ =='__main__':
     if nifti_bool == "y":
         pdl.gen_mat_pngs_from_nifti(nifti_path, root_process_database)
     #generate train files for slice classification model
-
-    dg.pngs_from_mat(mat_file_path, liver_seg_path, preprocessing_outpath, num_patients)
-
+    
+    #check to see if data present in processingoutpath
+    print(os.path.join(preprocessing_outpath, 'Train','Liver'))
+    if len(os.path.join(preprocessing_outpath, 'Train','Liver')) == 0: #could check other folders as well
+        pngs_from_mat(mat_file_path, liver_seg_path, preprocessing_outpath, num_patients)
+    else:
+        print('Data already present... \n Beginning retraining')
+    
+    ##class_calls here ## calls the model the model is either set to training or testing
+    liver_det = LiverDetection(config)
+    
 
     if cmdline.mode == "test":
         ##implement class call 
