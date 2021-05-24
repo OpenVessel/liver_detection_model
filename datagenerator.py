@@ -18,6 +18,9 @@ def pngs_from_mat(mat_file_path, liver_seg_path, outpath, numpatients = 25):
 
     train = os.path.join(outpath, "Train")
     validation = os.path.join(outpath, "Validation")
+    for path in [train, validation]:
+        if not os.path.exists(path):
+            os.mkdir(path)
 
     liver_train = os.path.join(train, "Liver")
     liver_validation =  os.path.join(validation, "Liver")
