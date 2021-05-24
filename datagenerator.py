@@ -4,7 +4,7 @@ import os
 import tensorflow as tf
 from scipy.io import loadmat, savemat
 import shutil
-import random 
+import random
 
 #assumes that mat files are generated first from process_database_liver.py 
 def pngs_from_mat(mat_file_path, liver_seg_path, outpath, numpatients = 25):
@@ -15,7 +15,6 @@ def pngs_from_mat(mat_file_path, liver_seg_path, outpath, numpatients = 25):
     # end result --> saves pngs to train, test, validation pathing separated by liver and non-liver
     numpatients = int(numpatients)
     assert(numpatients <= 131)
-
 
     train = os.path.join(outpath, "Train")
     validation = os.path.join(outpath, "Validation")
@@ -66,8 +65,8 @@ def pngs_from_mat(mat_file_path, liver_seg_path, outpath, numpatients = 25):
                 #if the image is all black (not containing liver/white pixels)
                 else:
                     if patient in patient_list[:cutoff]:
-                            X = os.path.join(nl_train, str(number +  "_" +patient + ".png"))
-                            mat_png.save(X)
+                        X = os.path.join(nl_train, str(number +  "_" +patient + ".png"))
+                        mat_png.save(X)
                     else:
                         Y = os.path.join(nl_validation, str(number +  "_" +patient + ".png"))
                         mat_png.save(Y)
