@@ -36,12 +36,14 @@ def pngs_from_mat(mat_file_path, liver_seg_path, outpath, numpatients = 25):
     #generates a list of randomly generated numbers (patients in range 0,130) 
     #to be used for the train, validation data for detection model
     patient_list = random.sample(range(131), numpatients)
+    print(patient_list)
     cutoff = int( len(patient_list) *.8 )
 
     
 
-    for patient in os.listdir(mat_file_path):
-        if patient in patient_list:
+    for patient in os.listdir(mat_file_path): #0-131
+        
+        if int(patient) in patient_list:
 
             patient_liver_segpath = os.path.join(liver_seg_path, patient)
             mat_file_patientpath = os.path.join(mat_file_path, patient)
@@ -60,17 +62,21 @@ def pngs_from_mat(mat_file_path, liver_seg_path, outpath, numpatients = 25):
                 if np.count_nonzero(image) != 0: 
                     print(patient, number)
                     if patient in patient_list[:cutoff]: #first 80% of the patients in the file list 
+                        print("l t: ",liver_train)
                         x = os.path.join(liver_train, str(number + "_" + patient + ".png"))
                         mat_png.save(x)
                     else:
+                        print("l v:",liver_validation)
                         y = os.path.join(liver_validation, str(number + "_" + patient + ".png")) 
                         mat_png.save(y)             
                 #if the image is all black (not containing liver/white pixels)
                 else:
                     if patient in patient_list[:cutoff]:
+                        print("nl t: ", nl_train)
                         X = os.path.join(nl_train, str(number +  "_" +patient + ".png"))
                         mat_png.save(X)
                     else:
+                        print("nl v: ",nl_validation)
                         Y = os.path.join(nl_validation, str(number +  "_" +patient + ".png"))
                         mat_png.save(Y)
 
